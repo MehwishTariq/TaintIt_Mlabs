@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "818195554941",
+    "project_id": "taint-it",
+    "storage_bucket": "taint-it.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818195554941:android:bf3924f361dd8fe9b44714",
+        "android_client_info": {
+          "package_name": "com.stardust.taintit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "818195554941-8913pfp0o2pldvtrqlfmv63h0qail660.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3FpMsF-e_TnZ4zDrwOxF8gJKN-7ZhFYA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "818195554941-8913pfp0o2pldvtrqlfmv63h0qail660.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
