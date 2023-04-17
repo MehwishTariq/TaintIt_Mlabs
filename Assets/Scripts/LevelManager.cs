@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameObject[] Levels;
-    [Header("Count of enemies appearing at a time")]
-    public int[] enemiesCount;
-    
-    public int currentLevel;
+    int currentLevel;
     public Transform LevelPlaceHolder;
-    public SpriteRenderer WallImage;
+    public SpriteRenderer WallImage { get; set; }
     public SpriteRenderer Square;
 
     private void Awake()
@@ -18,25 +14,26 @@ public class LevelManager : MonoBehaviour
         
         currentLevel = PlayerPrefs.GetInt(Utility.LevelNo, 1);
         SpawnLevel();
-        WallImage.sprite = GameManager.instance.dataHolder.SetWallImage();
-        WallImage.color = GameManager.instance.dataHolder.SetWallImageColor();
+        
         Square.material.SetColor("_SolidOutline",GameManager.instance.dataHolder.SetOutlineColor());
-        // Levels[currentLevel - 1].SetActive(true);
     }
 
-    public void SpawnLevel()
+    void SpawnLevel()
     {
         Instantiate(GameManager.instance.dataHolder.SpawnEnvironment(currentLevel - 1), LevelPlaceHolder).SetActive(true);
+        WallImage = GameManager.instance.dataHolder.SpawnWallImage(currentLevel - 1, LevelPlaceHolder);
+        WallImage.sprite = GameManager.instance.dataHolder.SetWallImage();
+        WallImage.color = GameManager.instance.dataHolder.SetWallImageColor();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         GameManager.instance.onGameComplete += SetNextLevel;
         
     }
-    public void SetNextLevel()
+    void SetNextLevel()
     {
-        if (currentLevel == 5)
+        if (currentLevel == GameManager.instance.dataHolder.Levels.Length)
             currentLevel = 1;
         else
             currentLevel++;

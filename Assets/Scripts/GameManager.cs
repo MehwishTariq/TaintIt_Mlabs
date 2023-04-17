@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public GameDataHolder dataHolder;
+    public LevelManager levelManager;
+    public WaveSystem waveSystem;
+    public Transform TriggerArea;
 
     public Transform[] camPos;
     public Transform viewCam, OpponentOnLevelDone;
@@ -70,11 +73,11 @@ public class GameManager : MonoBehaviour
         onGameStart?.Invoke();
         gameStarted = true;
 
-        FbAnalytics.LogFirebaseLevelStartEvent(PlayerPrefs.GetInt(Utility.LevelNo) - 1);
+        FbAnalytics.LogFirebaseLevelStartEvent(PlayerPrefs.GetInt(Utility.LevelNo, 1));
 
-        if (PlayerPrefs.GetInt(Utility.LevelNo) == 1 || PlayerPrefs.GetInt(Utility.LevelNo) == 10 ||
-            PlayerPrefs.GetInt(Utility.LevelNo) == 50)
-            FbAnalytics.LogFirebaseStartEvent(PlayerPrefs.GetInt(Utility.LevelNo));
+        if (PlayerPrefs.GetInt(Utility.LevelNo, 1) == 1 || PlayerPrefs.GetInt(Utility.LevelNo, 1) == 10 ||
+            PlayerPrefs.GetInt(Utility.LevelNo, 1) == 50)
+            FbAnalytics.LogFirebaseStartEvent(PlayerPrefs.GetInt(Utility.LevelNo,1));
 
     }
 

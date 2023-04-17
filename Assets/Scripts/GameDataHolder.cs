@@ -8,6 +8,11 @@ public class GameDataHolder : ScriptableObject
 {
     public Utility.Levels[] Levels;
 
+    public float GetClockTime()
+    {
+        return Levels[PlayerPrefs.GetInt(Utility.LevelNo, 1) - 1].clockTime;
+    }
+
     public float waveDelay()
     {
         return Levels[PlayerPrefs.GetInt(Utility.LevelNo, 1) - 1].waveDelay;
@@ -23,6 +28,12 @@ public class GameDataHolder : ScriptableObject
         return Levels[levelNo].Environment;
     }
 
+    public SpriteRenderer SpawnWallImage(int levelNo, Transform wallParent)
+    {
+        GameObject wallImage = Instantiate(Levels[levelNo].wallImage, wallParent);
+        return wallImage.GetComponent<SpriteRenderer>();
+
+    }
     public Sprite SetWallImage()
     {
         return Levels[PlayerPrefs.GetInt(Utility.LevelNo,1) - 1].WallImage;

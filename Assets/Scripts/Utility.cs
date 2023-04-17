@@ -20,10 +20,12 @@ public class Utility
     public struct Levels
     {
         public GameObject Environment;
+        public GameObject wallImage;
         public Sprite WallImage;
         public Color WallImageColor;
         public Color OutlineColor;
         public EnemyType[] enemyTypes;
         public float waveDelay;
+        public float clockTime;
     }
 }

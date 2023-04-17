@@ -13,11 +13,12 @@ public class UIManager : MonoBehaviour
     public Image countDownImage;
     public Image fadePanel;
     public TextMeshPro score, coins, progress;
+    public Image progressBar;
     public GameObject completePanel, failPanel, StartPanel, ScorePanel, TimePanel, InGamePanel;
     public TextMeshPro time;
     public int coinsAmt = 0;
     public int scoreNo = 0;
-    public float clockTime = 60f;
+    public float clockTime = 0f;
     public float minutes { get; set; }
     public float seconds { get; set; }
     public bool allowTimer = false;
@@ -25,6 +26,7 @@ public class UIManager : MonoBehaviour
     public void ChangeProgress(float progVal, float totalCount)
     {
         progress.text = ((int)((progVal / totalCount) * 100)).ToString() + " %";
+        progressBar.DOFillAmount(progVal / totalCount, 0.3f);
     }
 
     private void Awake()
@@ -36,7 +38,7 @@ public class UIManager : MonoBehaviour
     {
         minutes = 0;
         seconds = 0;
-
+        clockTime = GameManager.instance.dataHolder.GetClockTime();
         GameManager.onProgress += ChangeProgress;
     }
     private void Update()

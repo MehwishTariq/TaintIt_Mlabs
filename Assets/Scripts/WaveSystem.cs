@@ -14,14 +14,19 @@ public class WaveSystem : MonoBehaviour
     {
         GameManager.instance.onGameComplete -= RemoveAllEnemies;
         GameManager.instance.onGameFail -= RemoveAllEnemies;
+        GameManager.instance.onNewWaveCreation -= CreateInstance;
+    }
+    private void OnEnable()
+    {
+        GameManager.instance.onGameComplete += RemoveAllEnemies;
+        GameManager.instance.onGameFail += RemoveAllEnemies;
+        GameManager.instance.onNewWaveCreation += CreateInstance;
     }
     private void Start()
     {
         //numberOfEnemiesAtTime = GameManager.instance.numberOfEnemies;
-        GameManager.instance.onGameComplete += RemoveAllEnemies;
-        GameManager.instance.onGameFail += RemoveAllEnemies;
-        GameManager.instance.onNewWaveCreation += CreateInstance;
-        CreateInstance();
+        if(PlayerPrefs.GetInt(Utility.LevelNo,1) != 2)
+            CreateInstance();
     }
 
     public void CreateInstance()

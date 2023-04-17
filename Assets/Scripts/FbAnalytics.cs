@@ -36,31 +36,37 @@ public class FbAnalytics : MonoBehaviour
     public static void LogFirebaseInterstitialEvent(int AdsNo)
     {
         FirebaseAnalytics.LogEvent("inter_" + AdsNo);
+        Debug.Log("inter_" + AdsNo);
     }
 
     //on 1, 10, 50 levels
     public static void LogFirebaseStartEvent(int levelNo)
     {
         FirebaseAnalytics.LogEvent("start_" + levelNo);
+        Debug.Log("start_" + levelNo);
     }
 
     //on 1, 10, 50 levels
     public static void LogFirebaseCompleteEvent(int levelNo)
     {
         FirebaseAnalytics.LogEvent("complete_" + levelNo);
+        Debug.Log("complete_" + levelNo);
     }
     public static void LogFirebaseLevelCompleteEvent(int levelNo)
     {
         FirebaseAnalytics.LogEvent("Level_Complete_" + levelNo);
+        Debug.Log("Level_Complete_" + levelNo);
     }
 
     public static void LogFirebaseLevelStartEvent(int levelNo)
     {
         FirebaseAnalytics.LogEvent("Level_Start_" + levelNo);
+        Debug.Log("Level_Start_" + levelNo);
     }
 
     public static void LogFirebaseLevelFailEvent(int levelNo)
     {
         FirebaseAnalytics.LogEvent("Level_Fail_" + levelNo);
+        Debug.Log("Level_Fail_" + levelNo);
     }
 }

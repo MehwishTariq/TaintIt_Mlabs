@@ -31,14 +31,25 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        wallImage = GameObject.FindWithTag("WallImage").transform;
-        TriggerArea = GameObject.Find("Trigger").transform;
-        CreateMovePoint();
+        wallImage = GameManager.instance.levelManager.WallImage.transform;
+        TriggerArea = GameManager.instance.TriggerArea;
+        if (PlayerPrefs.GetInt(Utility.LevelNo, 1) != 2)
+            CreateMovePoint();
+        else
+            ChangeAreaPoint();
+    }
+
+    void ChangeAreaPoint()
+    {
+        GetComponentInChildren<Animator>().Play("Wipe");
+        areaPoint = new GameObject();
+        areaPoint.transform.position = transform.position;
+        areaPoint.transform.rotation = Quaternion.identity;
     }
 
     void CreateMovePoint()
     {
-        float add = Random.Range(1f, -1f);
+        float add = Random.Range(-1f, 1f);
         areaPoint = Instantiate(TriggerArea.gameObject);
         areaPoint.transform.position = new Vector3(TriggerArea.position.x + add, TriggerArea.position.y, TriggerArea.position.z);
         areaPoint.transform.rotation = Quaternion.identity;
@@ -79,8 +90,9 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.gameStarted && !moveEnemy)
-            MoveEnemy();
+        if (PlayerPrefs.GetInt(Utility.LevelNo, 1) != 2)
+            if (GameManager.instance.gameStarted && !moveEnemy)
+                MoveEnemy();
 
         if (GameManager.instance.gameStarted)
         {
@@ -89,8 +101,6 @@ public class EnemyMovement : MonoBehaviour
                 if (GetComponentInChildren<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Wipe") && !wipe)
                 {
                     spine.LookAt(-wallImage.forward);
-
-
                     StartCoroutine(WipePaint());
                 }
                 else
@@ -114,7 +124,8 @@ public class EnemyMovement : MonoBehaviour
                 //to instantiate when one wave is done
                 if (GameManager.instance.numberOfKilled == GameManager.instance.numberOfEnemies)
                 {
-                    StartCoroutine(NewWave());
+                    if(PlayerPrefs.GetInt(Utility.LevelNo, 1) != 2)
+                        StartCoroutine(NewWave());
                     //GameObject.Find("WaveSystem").GetComponent<WaveSystem>().CreateInstance();
                 }
                 Destroy(gameObject, 2f);
