@@ -46,10 +46,12 @@ public class EnemyMovement : MonoBehaviour
         areaPoint.transform.position = transform.position;
         areaPoint.transform.rotation = Quaternion.identity;
     }
+    public static int add;
 
     void CreateMovePoint()
     {
-        float add = Random.Range(-1f, 1f);
+        add = add - 1;
+        Debug.Log("HERE: " + add);
         areaPoint = Instantiate(TriggerArea.gameObject);
         areaPoint.transform.position = new Vector3(TriggerArea.position.x + add, TriggerArea.position.y, TriggerArea.position.z);
         areaPoint.transform.rotation = Quaternion.identity;

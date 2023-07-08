@@ -12,12 +12,11 @@ public class UIManager : MonoBehaviour
     public Sprite[] CountDown;
     public Image countDownImage;
     public Image fadePanel;
-    public TextMeshPro score, coins, progress;
+    public TextMeshProUGUI coins, progress;
     public Image progressBar;
-    public GameObject completePanel, failPanel, StartPanel, ScorePanel, TimePanel, InGamePanel;
-    public TextMeshPro time;
+    public GameObject completePanel, failPanel, StartPanel, PausePanel, TimePanel, InGamePanel;
+    public TextMeshProUGUI time1, time2;
     public int coinsAmt = 0;
-    public int scoreNo = 0;
     public float clockTime = 0f;
     public float minutes { get; set; }
     public float seconds { get; set; }
@@ -55,7 +54,7 @@ public class UIManager : MonoBehaviour
 
         minutes = Mathf.FloorToInt(clockTime / 60);
         seconds = Mathf.FloorToInt(clockTime % 60);
-        time.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        time1.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     // Start is called before the first frame update
@@ -73,9 +72,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowCompletePanel()
     {
+        time2.text = time1.text;
         PlayerPrefs.SetInt("TotalCoins", PlayerPrefs.GetInt("TotalCoins", 0) + coinsAmt);
         failPanel.SetActive(false);
-        ScorePanel.SetActive(false);
         TimePanel.SetActive(false);
         InGamePanel.SetActive(false);
         StartPanel.SetActive(false);
@@ -86,7 +85,6 @@ public class UIManager : MonoBehaviour
 
     public void ShowFailPanel()
     {
-        ScorePanel.SetActive(false);
         InGamePanel.SetActive(false);
         TimePanel.SetActive(false);
         completePanel.SetActive(false);
@@ -127,21 +125,9 @@ public class UIManager : MonoBehaviour
     
     public void NextLevel()
     {
-        PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score", 0) + scoreNo);
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
-    public void Restart()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(0);
-    }
-    public void SetScore()
-    {
-        score.GetComponent<RectTransform>().DOPunchScale(new Vector3(1.2f,1.2f,1.2f), 0.1f);
-        score.text = scoreNo.ToString();
-    }
-
     public void SetCoins()
     {
         coinsAmt = PlayerPrefs.GetInt("TotalCoins", 0);

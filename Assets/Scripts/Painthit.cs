@@ -68,8 +68,6 @@ public class Painthit : MonoBehaviour
 
                     if (rayhit.collider.CompareTag("Mask"))
                     {
-                        UIManager.instance.scoreNo+=5;
-                        UIManager.instance.SetScore();
                         GetComponentInChildren<Animator>().Play("Shoot");
                         AudioManager.instance.Play("PaintSplash");
                         impSource.GenerateImpulse();
@@ -91,8 +89,6 @@ public class Painthit : MonoBehaviour
 
                     if (rayhit.collider.CompareTag("Enemy") && !rayhit.collider.GetComponent<EnemyMovement>().dead)
                     {
-                        UIManager.instance.scoreNo+=5;
-                        UIManager.instance.SetScore();
                         GetComponentInChildren<Animator>().Play("Shoot");
                         AudioManager.instance.Play("HitEnemy");
                         impSource.GenerateImpulse();

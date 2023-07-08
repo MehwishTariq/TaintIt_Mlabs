@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         LevelFail = false;
         numberOfEnemies = dataHolder.GetEnemiesCount();
         WaveDelay = dataHolder.waveDelay();
+        EnemyMovement.add = numberOfEnemies;
     }
 
     public void UpdateProgres(int Val, int total)
@@ -50,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     public void InvokeNewWave()
     {
+        EnemyMovement.add = numberOfEnemies;
         onNewWaveCreation?.Invoke();
     }
 
@@ -73,11 +75,11 @@ public class GameManager : MonoBehaviour
         onGameStart?.Invoke();
         gameStarted = true;
 
-        FbAnalytics.LogFirebaseLevelStartEvent(PlayerPrefs.GetInt(Utility.LevelNo, 1));
+        //FbAnalytics.LogFirebaseLevelStartEvent(PlayerPrefs.GetInt(Utility.LevelNo, 1));
 
         if (PlayerPrefs.GetInt(Utility.LevelNo, 1) == 1 || PlayerPrefs.GetInt(Utility.LevelNo, 1) == 10 ||
-            PlayerPrefs.GetInt(Utility.LevelNo, 1) == 50)
-            FbAnalytics.LogFirebaseStartEvent(PlayerPrefs.GetInt(Utility.LevelNo,1));
+            PlayerPrefs.GetInt(Utility.LevelNo, 1) == 50) { }
+            //FbAnalytics.LogFirebaseStartEvent(PlayerPrefs.GetInt(Utility.LevelNo,1));
 
     }
 
@@ -103,18 +105,18 @@ public class GameManager : MonoBehaviour
 
         if (UIManager.instance.seconds > 15)
         {
-            AdsManager.instance.ShowInterstitialAd();
+            //AdsManager.instance.ShowInterstitialAd();
             adsShown++;
 
-            if (adsShown == 1 || adsShown == 5 || adsShown == 25)
-                FbAnalytics.LogFirebaseInterstitialEvent(adsShown);
+            if (adsShown == 1 || adsShown == 5 || adsShown == 25) { }
+                //FbAnalytics.LogFirebaseInterstitialEvent(adsShown);
         }
 
-        FbAnalytics.LogFirebaseLevelCompleteEvent(PlayerPrefs.GetInt(Utility.LevelNo) - 1);
+        //FbAnalytics.LogFirebaseLevelCompleteEvent(PlayerPrefs.GetInt(Utility.LevelNo) - 1);
 
         if (PlayerPrefs.GetInt(Utility.LevelNo) - 1 == 1 || PlayerPrefs.GetInt(Utility.LevelNo) - 1 == 10 ||
-            PlayerPrefs.GetInt(Utility.LevelNo) - 1 == 50)
-            FbAnalytics.LogFirebaseCompleteEvent(PlayerPrefs.GetInt(Utility.LevelNo) - 1);
+            PlayerPrefs.GetInt(Utility.LevelNo) - 1 == 50) { }
+            //FbAnalytics.LogFirebaseCompleteEvent(PlayerPrefs.GetInt(Utility.LevelNo) - 1);
 
     }
 
@@ -126,7 +128,7 @@ public class GameManager : MonoBehaviour
         onGameFail?.Invoke();
 
 
-        FbAnalytics.LogFirebaseLevelFailEvent(PlayerPrefs.GetInt(Utility.LevelNo));
+        //FbAnalytics.LogFirebaseLevelFailEvent(PlayerPrefs.GetInt(Utility.LevelNo));
 
     }
 }
