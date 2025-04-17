@@ -100,8 +100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spine: {fileID: 8909717023572898221}
   dead: 0
-  timeFactor: 7
-  no_OfHits: 2
+  timeFactor: 6
+  no_OfHits: 3
 --- !u!1001 &7755380979574888418
 PrefabInstance:
   m_ObjectHideFlags: 0

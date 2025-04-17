@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         LevelFail = false;
         numberOfEnemies = dataHolder.GetEnemiesCount();
         WaveDelay = dataHolder.waveDelay();
-        EnemyMovement.add = numberOfEnemies;
+        EnemyMovement.add = 2;
     }
 
     public void UpdateProgres(int Val, int total)
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     public void InvokeNewWave()
     {
-        EnemyMovement.add = numberOfEnemies;
+        EnemyMovement.add = 2;
         onNewWaveCreation?.Invoke();
     }
 
